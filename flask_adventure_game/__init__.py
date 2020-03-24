@@ -11,9 +11,7 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
 
-
-    @app.route('/')
-    def hello_world():
-        return 'Hello, World!'
+    from . import engine
+    app.register_blueprint(engine.bp)
 
     return app

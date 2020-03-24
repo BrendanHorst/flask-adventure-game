@@ -6,5 +6,5 @@ def test_config():
 
 def test_hello(client):
     response = client.get('/')
-    assert response.data == b'Dungeon Escape'
-    assert response.data == b'Enter Command:'
+    assert b'Dungeon Escape' in response.data
+    assert b'Enter Command:' in response.data
