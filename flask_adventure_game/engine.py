@@ -1,6 +1,6 @@
 import functools
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, make_response
 )
 from flask_adventure_game.map import Map
 
@@ -15,6 +15,9 @@ def game():
         command = request.form['command']
 
         if 'north' in command:
-            return render_template('index.html', message=map.next_room('north_room'))
+            resp = make_response(render_template('index.html', message=map.next_room('north_room')))
+            resp.set_cookie('current_room', 'north_room')
+            print(resp.headers)
+            return resp
 
     return render_template('index.html', message='Welcome to Dungeon Escape!')
