@@ -1,11 +1,12 @@
-from flask_adventure_game.rooms import *
+from flask_adventure_game import rooms
 
 class Map(object):
 
     def __init__(self):
 
-        self.north_room = NorthRoom()
-        self.south_room = SouthRoom()
+        self.north_room = rooms.NorthRoom()
+        self.middle_room = rooms.MiddleRoom()
+        self.south_room = rooms.SouthRoom()
 
     def next_room(self, target):
 
