@@ -10,11 +10,11 @@ def test_empty_command():
 def test_movement_commands():
 
     command = scan('Go north')
-    assert command['type'] == 'direction'
+    assert command['type'] == 'movement'
     assert command['detail'] == 'north'
 
     command = scan('HEAD WEST')
-    assert command['type'] == 'direction'
+    assert command['type'] == 'movement'
     assert command['detail'] == 'west'
 
     command = scan('slither south')
