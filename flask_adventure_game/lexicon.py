@@ -1,12 +1,12 @@
 words = {
     'directions' : ['north', 'south', 'east', 'west'],
     'movement' : ['go', 'move', 'head'],
-    'action' : ['jump', 'fly', 'leave', 'open', 'drink', 'sip', 'chug', 'throw', 'toss', 'drop', 'offer']
+    'action' : ['jump', 'fly', 'leave', 'open', 'unlock', 'drink', 'sip', 'chug', 'throw', 'toss', 'drop', 'offer']
 }
 
 def scan(input):
 
-    output = { 'type': 'error', 'detail': 'Unknown error'}
+    output = { 'type': 'error', 'detail': "I don't know what that means"}
 
     #Checks for an empty command submission
     if input == '':
@@ -26,17 +26,24 @@ def scan(input):
 
                     elif category == 'directions':
 
-                        #A direction without a movement command throws an error
-                        if output['type'] == 'error':
-                            output['detail'] = "I don't know what that means"
-                            break
-
-                        #A direction following a movement command is valid
-                        elif output['type'] == 'movement':
+                        #A direction without a movement command doesn't work,
+                        #it needs to follow a movement command to count
+                        if output['type'] == 'movement':
                             output['detail'] = word
                             break
 
-    if output['type'] == 'movement' and output['detail'] == 'Unknown error':
+                    #Movement commands take priority over action commands
+                    elif category == 'action' and output['type'] != 'movement':
+
+                        output['type'] = 'action'
+                        output['detail'] = word
+                        break
+
+            if output['detail'] != "I don't know what that means":
+                break
+
+
+    if output['type'] == 'movement' and output['detail'] == "I don't know what that means":
         output['type'] = 'error'
         output['detail'] = 'Please give a cardinal direction'
 
