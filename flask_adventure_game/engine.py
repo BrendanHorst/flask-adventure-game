@@ -29,6 +29,10 @@ def game():
 
                 return resp
 
+        elif command['type'] == 'error':
+            text = command['detail']
+
+            return render_template('index.html', message=map.next_room(location), error=text)
 
         resp = make_response(render_template('index.html', message=map.next_room(location)))
         resp.set_cookie('current_room', location)

@@ -40,7 +40,7 @@ def test_reset(client, app):
 def test_errors(client, app):
 
     response = client.post('/', data={'command': 'make waffles' })
-    assert b"I don't know what that means" in repsonse.data
+    assert b"I don't know what that means" in response.data
 
     response = client.post('/', data={'command': 'go there'})
     assert b"Please give a cardinal direction" in response.data

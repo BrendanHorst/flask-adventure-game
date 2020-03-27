@@ -6,6 +6,9 @@
   </head>
   <body>
     <h1>Dungeon Escape</h1>
+    {% if error %}
+      <p>{{ error }}</p>
+    {% endif %}
     <p>{{ message }}</p>
 
     <form class="commandPrompt" action="/" method="post">
