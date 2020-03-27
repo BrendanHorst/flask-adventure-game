@@ -134,8 +134,6 @@ class RootForest(Room):
 
     def enter(self):
 
-        player.prompt = "(Overgrowth) > "
-
         return "\nYou enter a room filled with the roots from what must be a forest on the surface, so that it's hard to move around."
 
 
