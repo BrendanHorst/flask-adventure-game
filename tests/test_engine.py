@@ -9,21 +9,17 @@ def test_interface(client, app):
     assert b'Enter Command:' in response.data
     assert b'<button type="submit"' in response.data
 
-    #Moving north from the start (middle) should return the north room
+    #Moving north from the start (south cell) should return the dungeon
     response = client.post('/', data={'command': 'move north'})
-    assert b'You are in the northern room' in response.data
-    assert 'current_room=north_room' in response.headers['Set-Cookie']
+    assert 'current_room=dungeon' in response.headers['Set-Cookie']
 
-    #Moving south twice from the north room should return the south room
-    response = client.post('/', data={'command': 'move south'})
-    response = client.post('/', data={'command': 'move south'})
-    assert b'You are in the southern room' in response.data
-    assert 'current_room=south_room' in response.headers['Set-Cookie']
+    #Moving west from the dungeon should return the crossroads
+    response = client.post('/', data={'command': 'move west'})
+    assert 'current_room=crossroads' in response.headers['Set-Cookie']
 
-    #Moving left or right should stay in the current room (south)
-    response = client.post('/', data={'command': 'move east'})
-    assert b'You are in the southern room' in response.data
-    assert 'current_room=south_room' in response.headers['Set-Cookie']
+    #Moving south from the crossroads should stay in the same room
+    response = client.post('/', data={'command': 'move south'})
+    assert 'current_room=crossroads' in response.headers['Set-Cookie']
 
     #Ensures that inputting a false command does not go back to the beginning
     response = client.post('/', data={'command': ' '})

@@ -26,7 +26,7 @@ class Dungeon(Room):
 
         super(Dungeon, self).__init__()
 
-        self.adjacent_rooms['south'] = 'start'
+        self.adjacent_rooms['south'] = 'south_cell'
         self.adjacent_rooms['north'] = 'north_cell'
         self.adjacent_rooms['east'] = 'east_cell'
         self.adjacent_rooms['west'] = 'crossroads'
@@ -40,7 +40,7 @@ class NorthCell(Room):
 
     def __init__(self):
 
-        super(North_Cell, self).__init__()
+        super(NorthCell, self).__init__()
 
         self.adjacent_rooms['south'] = 'dungeon'
 
@@ -53,7 +53,7 @@ class EastCell(Room):
 
     def __init__(self):
 
-        super(East_Cell, self).__init__()
+        super(EastCell, self).__init__()
 
         self.adjacent_rooms['west'] = 'dungeon'
 
@@ -83,7 +83,7 @@ class BridgeEast(Room):
 
     def __init__(self):
 
-        super(Bridge_East, self).__init__()
+        super(BridgeEast, self).__init__()
 
         self.adjacent_rooms['east'] = 'crossroads'
         self.adjacent_rooms['west'] = 'bridge_west'
@@ -97,7 +97,7 @@ class BridgeWest(Room):
 
     def __init__(self):
 
-        super(Bridge_West, self).__init__()
+        super(BridgeWest, self).__init__()
 
         self.adjacent_rooms['east'] = 'bridge_east'
         self.adjacent_rooms['north'] = 'cavern_entrance'
@@ -111,7 +111,7 @@ class CavernEntrance(Room):
 
     def __init__(self):
 
-        super(Cavern_Entrance, self).__init__()
+        super(CavernEntrance, self).__init__()
 
         self.adjacent_rooms['south'] = 'bridge_west'
         self.adjacent_rooms['north'] = 'goal'
@@ -127,7 +127,7 @@ class RootForest(Room):
 
     def __init__(self):
 
-        super(Root_Forest, self).__init__()
+        super(RootForest, self).__init__()
 
         self.adjacent_rooms['south'] = 'crossroads'
         self.adjacent_rooms['west'] = 'waterfall'

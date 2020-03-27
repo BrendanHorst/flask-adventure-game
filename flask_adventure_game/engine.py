@@ -16,7 +16,7 @@ def game():
         command = scan(request.form['command'])
         location = request.cookies.get('current_room')
         if location == None:
-            location = 'middle_room'
+            location = 'south_cell'
 
         if command['type'] == 'movement':
 
