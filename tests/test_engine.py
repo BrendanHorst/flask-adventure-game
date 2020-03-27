@@ -9,6 +9,8 @@ def test_interface(client, app):
     assert b'Enter Command:' in response.data
     assert b'<button type="submit"' in response.data
 
+def test_movement(client, app):
+    
     #Moving north from the start (south cell) should return the dungeon
     response = client.post('/', data={'command': 'move north'})
     assert 'current_room=dungeon' in response.headers['Set-Cookie']
