@@ -35,3 +35,12 @@ def test_reset(client, app):
     response = client.get('/reset')
     assert b'Welcome to Dungeon Escape!' in response.data
     assert 'current_room=south_cell' in response.headers['Set-Cookie']
+
+
+def test_errors(client, app):
+
+    response = client.post('/', data={'command': 'make waffles' })
+    assert b"I don't know what that means" in repsonse.data
+
+    response = client.post('/', data={'command': 'go there'})
+    assert b"Please give a cardinal direction" in response.data
