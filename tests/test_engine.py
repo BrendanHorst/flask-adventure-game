@@ -7,10 +7,12 @@ def test_interface(client, app):
     assert response.status_code == 200
     assert b'Dungeon Escape' in response.data
     assert b'Enter Command:' in response.data
-    assert b'<button type="submit"' in response.data
+    assert b'<button type="submit">Submit</button>' in response.data
+    assert b'<button type="submit">Reset</button>' in response.data
+
 
 def test_movement(client, app):
-    
+
     #Moving north from the start (south cell) should return the dungeon
     response = client.post('/', data={'command': 'move north'})
     assert 'current_room=dungeon' in response.headers['Set-Cookie']
@@ -26,3 +28,10 @@ def test_movement(client, app):
     #Ensures that inputting a false command does not go back to the beginning
     response = client.post('/', data={'command': ' '})
     assert b'Welcome to Dungeon Escape!' not in response.data
+
+
+def test_reset(client, app):
+
+    response = client.get('/reset')
+    assert b'Welcome to Dungeon Escape!' in response.data
+    assert 'current_room=south_cell' in response.headers['Set-Cookie']
