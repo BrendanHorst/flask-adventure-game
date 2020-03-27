@@ -34,4 +34,11 @@ def game():
         resp.set_cookie('current_room', location)
         return resp
 
-    return render_template('index.html', message='Welcome to Dungeon Escape!')
+    return render_template('index.html', message='Welcome to Dungeon Escape!\nPress submit to continue...')
+
+@bp.route('/reset', methods=['GET'])
+def reset():
+
+    resp = make_response(render_template('index.html', message='Welcome to Dungeon Escape!\nPress submit to continue...'))
+    resp.set_cookie('current_room', 'south_cell')
+    return resp

@@ -7,12 +7,17 @@
   <body>
     <h1>Dungeon Escape</h1>
     <p>{{ message }}</p>
+
     <form class="commandPrompt" action="/" method="post">
       <label>
         Enter Command:
         <input name="command" type="text"/>
       </label>
       <button type="submit">Submit</button>
+    </form>
+
+    <form class="resetButton" action="/reset" method="get">
+      <button type="submit">Reset</button>
     </form>
   </body>
 </html>
